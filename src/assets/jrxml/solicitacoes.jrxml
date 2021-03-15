@@ -33,7 +33,7 @@
 			</rectangle>
 			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
 				<reportElement x="0" y="0" width="80" height="60" uuid="75feb35f-19b6-4010-a9ed-61bf79ff2f8a"/>
-				<imageExpression><![CDATA[$P{report_assets} + "/atuvsit.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{report_assets} + "/images/atuvsit.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="122" y="12" width="310" height="48" uuid="2af9b34e-994d-4bd5-bb67-d6b9ca330784"/>
@@ -96,10 +96,16 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{st_solicitacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new String($P{st_solicitacao} == 0 ? "Pendente" :
+$P{st_solicitacao} == 1 ? "Pausada" :
+$P{st_solicitacao} == 2 ? "Indeferida" :
+$P{st_solicitacao} == 3 ? "Deferida" :
+$P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="470" y="103" width="84" height="15" uuid="c48f2025-5708-4176-8439-50ace170c478"/>
+				<reportElement x="470" y="103" width="84" height="15" uuid="c48f2025-5708-4176-8439-50ace170c478">
+					<printWhenExpression><![CDATA[!$P{dt_inicial}.trim().equals("") && !$P{dt_final}.trim().equals("")]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>

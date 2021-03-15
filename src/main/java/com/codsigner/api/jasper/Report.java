@@ -36,8 +36,10 @@ public class Report {
 
             String jasperName = parsed.get("jrxmlName").asText();
             Map<String, Object> params = mapper.convertValue(parsed.get("params"), new TypeReference<Map<String, Object>>(){});
-            ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("params"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
+            ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("data"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
             
+            System.out.print(data);
+
             byte[] report = JasperReportFactory.print(jasperName, params, data);
             System.out.println("Chegou até aqui");
             return Response.ok(report)

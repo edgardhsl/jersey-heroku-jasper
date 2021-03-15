@@ -42,7 +42,7 @@ public class JasperReportFactory {
                 throw new Exception("Arquivo de relatório não encontrado");
             }
 
-            paramns.put("report_assets", JasperReportFactory.assetsDir);
+            paramns.put("report_assets", root.toAbsolutePath() + JasperReportFactory.assetsDir);
 
             JasperReport reportFile = JasperReportFactory.getReportFile(reportFileDir);
             JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(rows);	
