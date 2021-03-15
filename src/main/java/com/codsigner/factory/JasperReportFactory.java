@@ -39,7 +39,7 @@ public class JasperReportFactory {
 
             paramns.put("report_assets", JasperReportFactory.assetsDir);
 
-            JasperReport reportFile = JasperReportFactory.getReportFile(root.toAbsolutePath() + reportDir + '/' + jrxmlFile);
+            JasperReport reportFile = JasperReportFactory.getReportFile(root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml");
             JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(rows);	    			    		
 	    	JasperPrint print = JasperFillManager.fillReport(reportFile, paramns, datasource);            
             ByteArrayOutputStream out = new ByteArrayOutputStream();
