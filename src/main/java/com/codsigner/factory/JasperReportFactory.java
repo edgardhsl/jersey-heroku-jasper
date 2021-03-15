@@ -35,7 +35,9 @@ public class JasperReportFactory {
                 paramns = new HashMap<String, Object>();
             }
 
-            System.out.println(root.toAbsolutePath() + reportDir + '/' + jrxmlFile);
+            if(!(new File(root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml").isFile())) {
+                throw new Exception("Arquivo de relatório não encontrado");
+            }
 
             paramns.put("report_assets", JasperReportFactory.assetsDir);
 
@@ -62,6 +64,9 @@ public class JasperReportFactory {
 			
 			return out.toByteArray();
         } catch (JRException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
