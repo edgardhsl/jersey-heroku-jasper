@@ -47,12 +47,11 @@ public class JasperReportFactory {
 
             JasperPrint print = JasperFillManager.fillReport(reportFile, paramns, datasource);
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-
+            SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
             JRPdfExporter exporter = new JRPdfExporter();
+            
             exporter.setExporterInput(new SimpleExporterInput(print));
             exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(out));
-            SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
 
             configuration.setPermissions(PdfWriter.ALLOW_COPY | PdfWriter.ALLOW_PRINTING);
             exporter.setConfiguration(configuration);
