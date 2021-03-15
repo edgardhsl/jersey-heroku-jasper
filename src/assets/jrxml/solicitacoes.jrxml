@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitacoes" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="527ae3c1-c10e-4b41-b983-14305308c942">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="report_assets" class="java.lang.String"/>
+	<parameter name="dt_inicial" class="java.lang.String"/>
+	<parameter name="dt_final" class="java.lang.String"/>
+	<parameter name="nm_instituicao" class="java.lang.String"/>
+	<parameter name="nm_pessoa" class="java.lang.String"/>
+	<parameter name="st_solicitacao" class="java.lang.Integer"/>
+	<parameter name="uuid_usuario" class="java.lang.String"/>
+	<parameter name="nm_usuario" class="java.lang.String"/>
+	<field name="nm_pessoa" class="java.lang.String"/>
+	<field name="nm_instituicao" class="java.lang.String"/>
+	<field name="st_solicitacao" class="java.lang.Integer"/>
+	<field name="dt_solicitacao" class="java.lang.String"/>
+	<field name="nm_usuario" class="java.lang.String">
+		<fieldDescription><![CDATA[nm_usuario]]></fieldDescription>
+	</field>
+	<field name="uuid_usuario" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="146">
+			<rectangle>
+				<reportElement x="0" y="103" width="555" height="29" backcolor="#DDDDDD" uuid="f70f4986-e2df-49d5-8264-2b1892c625da"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="0" width="80" height="60" uuid="75feb35f-19b6-4010-a9ed-61bf79ff2f8a"/>
+				<imageExpression><![CDATA[$P{report_assets} + "/atuvsit.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="122" y="12" width="310" height="48" uuid="2af9b34e-994d-4bd5-bb67-d6b9ca330784"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATUV/SIT - Brilhetagem Eletrônica Municipal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="76" width="400" height="20" uuid="6f85b46e-f5b1-4f07-b38c-aa0f6bf985e3"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Solicitações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="103" width="32" height="15" uuid="fd59b4a4-8457-48b9-8704-1d7608311853"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="103" width="50" height="15" uuid="950325b9-4e88-4372-af74-365443955cbf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instituição:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="103" width="44" height="15" uuid="27ac538b-e07e-47ac-9d5e-dd6df04d2371"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="103" width="40" height="15" uuid="071926c7-c267-4d44-a3ef-b9bcce880c73"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="103" width="96" height="15" uuid="0eb5a8fa-a16d-4811-97f2-1416014aed01"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nm_pessoa} ? $P{nm_pessoa} : "Sem filtro"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="192" y="103" width="138" height="15" uuid="ff7731e3-88da-448f-85b0-785f621a1bc7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nm_instituicao} ? $P{nm_instituicao} : "Sem filtro"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="103" width="56" height="15" uuid="7b84b1ba-f42d-448e-8278-1888c3bd26b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($P{st_solicitacao} == 0 ? "Pendente" :
+$P{st_solicitacao} == 1 ? "Pausada" :
+$P{st_solicitacao} == 2 ? "Indeferida" :
+$P{st_solicitacao} == 3 ? "Deferida" :
+$P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="470" y="103" width="84" height="15" uuid="c48f2025-5708-4176-8439-50ace170c478"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{dt_inicial} ? new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse($P{dt_inicial})) : "") + 
+($P{dt_final} ?  " até " +new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse(($P{dt_final}))) : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="118" width="212" height="15" uuid="97ad7cf4-7a33-4300-abc2-2b300218a536"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nm_usuario} ? $P{nm_usuario}  : "Todos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="118" width="58" height="15" uuid="8da229ef-cc51-4d2e-981c-247bbc9837a4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Colaborador:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" forecolor="#666666" uuid="a511fbdc-5dd2-4d02-9b49-f7d8f8b0feb3"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="0" width="150" height="15" uuid="2c167efc-c44d-48a6-9e23-7044d473fd00"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="210" height="15" uuid="cd337664-7195-4ff0-9cae-7a40499d5b15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instituição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="73" height="15" uuid="f97ab7ea-161b-4cb5-9a43-113067f15221"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="74" height="15" uuid="dd058ee9-c2e2-40b4-b9ce-5c498cf0f9da"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="15" width="555" height="1" uuid="aaffe925-304a-4faf-b767-5c9eb097caf1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="15" uuid="c4f77889-6962-4cf3-a3a7-a569c9629354"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="30" y="1" width="150" height="15" uuid="e5a35d61-d58b-4215-918d-619d99f37ddd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pessoa}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="180" y="1" width="209" height="15" uuid="819c41c5-bcd4-4454-b0dd-c28b73e8396e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_instituicao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="407" y="1" width="73" height="15" uuid="b463bb77-4f60-4dea-8c21-9cede7af8d04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($F{st_solicitacao} == 0 ? "Pendente" :
+$F{st_solicitacao} == 1 ? "Pausada" :
+$F{st_solicitacao} == 2 ? "Indeferida" :
+$F{st_solicitacao} == 3 ? "Deferida" :
+$F{st_solicitacao} == 4 ? "Cancelada" : "").toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="M/d/yy h:mm">
+				<reportElement x="480" y="1" width="74" height="15" uuid="05a8d4dd-5858-485a-ac43-77f5145527bb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse($F{dt_solicitacao}))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="18" width="555" height="1" forecolor="#666666" uuid="73f58f00-d2ea-4850-89f7-607c0b7a0f7d"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="1" width="30" height="15" uuid="f2c69732-8175-4a82-8006-17433d97b5f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="350" y="4" width="165" height="13" backcolor="#FFFFFF" uuid="470071d6-9789-41e5-b8f6-3e4340cc0ab2"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#FFFFFF" uuid="f64278b8-d5b7-41e6-a40d-0e8929c0b848"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="2696db9f-481e-441c-8557-40163e951201"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="4" width="170" height="13" uuid="f9a43cbb-36a8-4e61-8904-14b710594355"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATUV/SIT - www.atuv.com.br]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement x="440" y="20" width="114" height="15" uuid="6b0c024b-2765-44a2-bffc-7500ec20ffaf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="440" y="35" width="114" height="15" uuid="e65fdf1e-d41a-499d-9bdf-fafc24a62c35">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

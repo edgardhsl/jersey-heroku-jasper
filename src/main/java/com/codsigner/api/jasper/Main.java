@@ -1,4 +1,4 @@
-package com.codsigner.api.jasper.heroku;
+package com.codsigner.api.jasper;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;

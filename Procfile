@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -cp target/classes:target/dependency/* com.codsigner.api.jasper.heroku.Main
+web: java -Dserver.port=$PORT -cp target/classes:target/dependency/* com.codsigner.api.jasper.Main
