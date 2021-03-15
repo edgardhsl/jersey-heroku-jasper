@@ -110,7 +110,7 @@
     </build>
 
     <properties>
-        <jersey.version>3.0.0-M6</jersey.version>
+        <jersey.version>3.0.0-M1</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.0.6.v20130930</jetty.version>
     </properties>
