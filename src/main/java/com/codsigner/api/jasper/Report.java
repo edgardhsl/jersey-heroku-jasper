@@ -35,7 +35,7 @@ public class Report {
                 return Response.status(400).entity("Template de relatório não informado.").build();
             }
 
-            String jasperName = parsed.get("jrxmlName").toString();
+            String jasperName = parsed.get("jrxmlName").asText();
             Map<String, Object> params = mapper.convertValue(parsed.get("params"), new TypeReference<Map<String, Object>>(){});
             ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("params"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
             
