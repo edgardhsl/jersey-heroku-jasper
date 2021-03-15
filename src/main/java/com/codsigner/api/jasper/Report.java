@@ -14,7 +14,6 @@ import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /*
@@ -24,7 +23,7 @@ import jakarta.ws.rs.core.Response;
 public class Report {
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces("application/pdf")
     public Response report(@DefaultValue("{}") String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -40,8 +39,11 @@ public class Report {
             ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("params"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
             
             byte[] report = JasperReportFactory.print(jasperName, params, data);
-
-            return Response.ok().entity(report).build();
+            System.out.println("Chegou até aqui");
+            return Response.ok(report)
+            .header("Content-Type", "application/pdf")
+            .header("Content-Disposition",  "filename=restfile.pdf")
+            .build();
         } catch (Exception e) {            
             e.printStackTrace();
             return Response.serverError().build();

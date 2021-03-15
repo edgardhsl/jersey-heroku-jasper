@@ -36,9 +36,9 @@ public class JasperReportFactory {
             }
 
 
-            String reportFileDir = root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml";
+            String reportFileDir = root.toAbsolutePath() + reportDir + '/' + jrxmlFile;
 
-            if(new File(reportFileDir).isFile() == false) {
+            if(new File(reportFileDir + ".jrxml").isFile() == false) {
                 throw new Exception("Arquivo de relatório não encontrado");
             }
 
@@ -80,14 +80,17 @@ public class JasperReportFactory {
             JasperReport reportFile;
 	    	
 			if(new File(filePath+".jasper").exists()) {
+                System.out.print("Load");
 				reportFile = (JasperReport)JRLoader.loadObjectFromFile(filePath+".jasper");
 			}
 			else {
+                System.out.print(filePath+".jrxml");
 				reportFile = JasperCompileManager.compileReport(filePath+".jrxml");
 			}
 			
 			return reportFile;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

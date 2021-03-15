@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitacoes" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="527ae3c1-c10e-4b41-b983-14305308c942">
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitacoes" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="527ae3c1-c10e-4b41-b983-14305308c942">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -82,40 +82,36 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nm_pessoa} ? $P{nm_pessoa} : "Sem filtro"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[!$P{nm_pessoa}.equals("") ? $P{nm_pessoa} : "Sem filtro"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="192" y="103" width="138" height="15" uuid="ff7731e3-88da-448f-85b0-785f621a1bc7"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nm_instituicao} ? $P{nm_instituicao} : "Sem filtro"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[!$P{nm_instituicao}.equals("") ? $P{nm_instituicao} : "Sem filtro"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="374" y="103" width="56" height="15" uuid="7b84b1ba-f42d-448e-8278-1888c3bd26b0"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new String($P{st_solicitacao} == 0 ? "Pendente" :
-$P{st_solicitacao} == 1 ? "Pausada" :
-$P{st_solicitacao} == 2 ? "Indeferida" :
-$P{st_solicitacao} == 3 ? "Deferida" :
-$P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{st_solicitacao}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="470" y="103" width="84" height="15" uuid="c48f2025-5708-4176-8439-50ace170c478"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{dt_inicial} ? new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse($P{dt_inicial})) : "") + 
-($P{dt_final} ?  " até " +new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse(($P{dt_final}))) : "")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(!$P{dt_inicial}.equals("") ? new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse($P{dt_inicial})) : "") + 
+(!$P{dt_final}.equals("") ?  " até " +new SimpleDateFormat("dd/MM/yyyy").format((new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).parse(($P{dt_final}))) : "")]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="68" y="118" width="212" height="15" uuid="97ad7cf4-7a33-4300-abc2-2b300218a536"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nm_usuario} ? $P{nm_usuario}  : "Todos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[!$P{nm_usuario}.equals("") ? $P{nm_usuario}  : "Todos"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="118" width="58" height="15" uuid="8da229ef-cc51-4d2e-981c-247bbc9837a4"/>
@@ -173,7 +169,7 @@ $P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
 	</columnHeader>
 	<detail>
 		<band height="19">
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="30" y="1" width="150" height="15" uuid="e5a35d61-d58b-4215-918d-619d99f37ddd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
 				</reportElement>
@@ -183,7 +179,7 @@ $P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pessoa}.toUpperCase()]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="180" y="1" width="209" height="15" uuid="819c41c5-bcd4-4454-b0dd-c28b73e8396e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
 				</reportElement>
@@ -193,7 +189,7 @@ $P{st_solicitacao} == 4 ? "Cancelada" : "Todas")]]></textFieldExpression>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_instituicao}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="407" y="1" width="73" height="15" uuid="b463bb77-4f60-4dea-8c21-9cede7af8d04">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
 				</reportElement>
@@ -207,7 +203,7 @@ $F{st_solicitacao} == 2 ? "Indeferida" :
 $F{st_solicitacao} == 3 ? "Deferida" :
 $F{st_solicitacao} == 4 ? "Cancelada" : "").toUpperCase()]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="M/d/yy h:mm">
+			<textField textAdjust="StretchHeight" pattern="M/d/yy h:mm">
 				<reportElement x="480" y="1" width="74" height="15" uuid="05a8d4dd-5858-485a-ac43-77f5145527bb">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
 				</reportElement>
@@ -276,7 +272,7 @@ $F{st_solicitacao} == 4 ? "Cancelada" : "").toUpperCase()]]></textFieldExpressio
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="440" y="35" width="114" height="15" uuid="e65fdf1e-d41a-499d-9bdf-fafc24a62c35">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb74fe89-2059-42ff-816b-50b8555f56c0"/>
 				</reportElement>
