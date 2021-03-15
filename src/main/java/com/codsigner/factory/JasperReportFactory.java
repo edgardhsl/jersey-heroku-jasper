@@ -25,8 +25,8 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 public class JasperReportFactory {
 
     private static final Path root = (Paths.get(".").normalize().toAbsolutePath());
-    private static final String assetsDir = "/assets";
-    private static final String reportDir = "/assets/jrxml";
+    private static final String assetsDir = "/src/assets";
+    private static final String reportDir = "/src/assets/jrxml";
     
     public static byte[] print(String jrxmlFile, Map<String, Object> paramns, ArrayList<HashMap<String, Object>> rows) {
         try {
