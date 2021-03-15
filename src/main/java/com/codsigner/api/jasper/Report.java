@@ -16,9 +16,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
-/*
- * Root resource (exposed at "myresource" path)
- */
 @Path("report")
 public class Report {
 
@@ -37,11 +34,9 @@ public class Report {
             String jasperName = parsed.get("jrxmlName").asText();
             Map<String, Object> params = mapper.convertValue(parsed.get("params"), new TypeReference<Map<String, Object>>(){});
             ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("data"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
-            
-            System.out.print(data);
 
             byte[] report = JasperReportFactory.print(jasperName, params, data);
-            System.out.println("Chegou até aqui");
+            
             return Response.ok(report)
             .header("Content-Type", "application/pdf")
             .header("Content-Disposition",  "filename=restfile.pdf")
