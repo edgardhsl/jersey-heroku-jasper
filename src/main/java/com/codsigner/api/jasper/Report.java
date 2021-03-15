@@ -1,5 +1,11 @@
 package com.codsigner.api.jasper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.codsigner.factory.JasperReportFactory;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,10 +35,16 @@ public class Report {
             JsonNode parsed = mapper.readTree(json);
 
             if(parsed.get("jrxmlName") == null) {
-                Response.status(400).entity("Template de relatório não informado.").build();
+                return Response.status(400).entity("Template de relatório não informado.").build();
             }
 
-            return Response.ok().entity(parsed.toString()).build();
+            String jasperName = parsed.get("jrxmlName").toString();
+            Map<String, Object> params = mapper.convertValue(parsed.get("params"), new TypeReference<Map<String, Object>>(){});
+            ArrayList<HashMap<String, Object>> data = mapper.convertValue(parsed.get("params"), new TypeReference<ArrayList<HashMap<String, Object>>>(){});
+            
+            byte[] report = JasperReportFactory.print(jasperName, params, data);
+
+            return Response.ok().entity(report).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }        
