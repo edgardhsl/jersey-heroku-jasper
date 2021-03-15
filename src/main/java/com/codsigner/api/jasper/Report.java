@@ -40,7 +40,8 @@ public class Report {
             byte[] report = JasperReportFactory.print(jasperName, params, data);
 
             return Response.ok().entity(report).build();
-        } catch (Exception e) {
+        } catch (Exception e) {            
+            e.printStackTrace();
             return Response.serverError().build();
         }        
     }
