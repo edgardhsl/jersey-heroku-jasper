@@ -28,9 +28,11 @@ public class Report {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode parsed = mapper.readTree(json);
 
-            System.out.println(json);
+            if(parsed.get("jrxmlName") == null) {
+                Response.status(400).entity("Template de relatório não informado.").build();
+            }
 
-            return Response.ok().entity(parsed).build();
+            return Response.ok().entity(parsed.toString()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }        
