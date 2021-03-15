@@ -35,13 +35,16 @@ public class JasperReportFactory {
                 paramns = new HashMap<String, Object>();
             }
 
-            if(!(new File(root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml").isFile())) {
+
+            String reportFileDir = root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml";
+
+            if(new File(reportFileDir).isFile() == false) {
                 throw new Exception("Arquivo de relatório não encontrado");
             }
 
             paramns.put("report_assets", JasperReportFactory.assetsDir);
 
-            JasperReport reportFile = JasperReportFactory.getReportFile(root.toAbsolutePath() + reportDir + '/' + jrxmlFile + ".jrxml");
+            JasperReport reportFile = JasperReportFactory.getReportFile(reportFileDir);
             JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(rows);	
                         
             System.out.println("--------- LOG --------");
