@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.codsigner.factory.JasperReportFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,6 +28,7 @@ public class Report {
     public Response report(@DefaultValue("{}") String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
             JsonNode parsed = mapper.readTree(json);
 
             if(parsed.get("jrxmlName") == null) {
