@@ -30,7 +30,7 @@ public class Report {
 
             System.out.println(json);
 
-            return Response.ok().build();
+            return Response.ok().entity(parsed).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }        
